@@ -15,6 +15,6 @@ export class Post extends BaseEntity {
   description: string;
 
   @OneToMany(() => Comment, (comments) => comments.post, { lazy: true })
-  @Field(() => [Comment])
+  @Field(() => [Comment], { nullable: 'itemsAndList' })
   comments?: Promise<Comment[]> | Comment;
 }

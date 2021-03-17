@@ -11,7 +11,7 @@ export class PostsResolver {
     private readonly postsService: PostsService,
   ) {}
 
-  @Query(() => [Post])
+  @Query(() => [Post], { nullable: 'items' })
   async postsList(@Args() postsFilter: PostsFilter): Promise<Post[]> {
     const where = this.postsService.generateWhere(postsFilter);
 

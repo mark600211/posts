@@ -1,5 +1,5 @@
 import { ArgsType, Field, ID, InputType, PartialType } from '@nestjs/graphql';
-import { IsString, IsUUID } from 'class-validator';
+import { IsOptional, IsString, IsUUID } from 'class-validator';
 import { Paginator } from 'src/paginator.dto';
 
 @InputType()
@@ -22,7 +22,8 @@ export class UpdatePostsInput extends PartialType(CreatePostInput) {
 
 @ArgsType()
 export class PostsFilter extends Paginator {
+  @IsOptional()
   @IsString()
-  @Field()
-  search: string;
+  @Field({ nullable: true })
+  search?: string;
 }

@@ -6,7 +6,7 @@ import {
   IntersectionType,
   PartialType,
 } from '@nestjs/graphql';
-import { IsString, IsUUID } from 'class-validator';
+import { IsOptional, IsString, IsUUID } from 'class-validator';
 import { Paginator } from 'src/paginator.dto';
 
 @InputType()
@@ -33,9 +33,10 @@ export class UpdateCommentInput extends PartialType(CreateCommentInput) {
 
 @ArgsType()
 export class CommentsFilter extends Paginator {
+  @IsOptional()
   @IsString()
-  @Field()
-  search: string;
+  @Field({ nullable: true })
+  search?: string;
 
   @IsUUID()
   @Field(() => ID)
